@@ -27,17 +27,12 @@
 </div>
 <script>
   const SCRIPT_URL = 'https://script.google.com/a/akita.ac/macros/s/AKfycbwPZPZCl1emzTgsLeGv3ns-i1f_gt8fmOoh6JCt0D35o_v4BJVuNzHwK9dNcHfAxEaF/exec';
-
-  // Get the ID from the path — e.g. q.akita.ac/AKT-2TV8YT
-  const path = window.location.pathname.replace(/^\//, '').trim();
-
+  const path   = window.location.pathname.replace(/^\//, '').trim();
+  const params = new URLSearchParams(window.location.search);
+  const type   = params.get('type') || 'quote';
   if(path){
-    // Determine type from query param — defaults to quote (customer-facing)
-    const params = new URLSearchParams(window.location.search);
-    const type = params.get('type') || 'quote';
     window.location.replace(SCRIPT_URL + '?id=' + encodeURIComponent(path) + '&type=' + type);
   } else {
-    // No ID — redirect to main site
     window.location.replace('https://akita.ac');
   }
 </script>
